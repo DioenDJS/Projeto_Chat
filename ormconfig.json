@@ -4,11 +4,15 @@
    "synchronize": false,
    "logging": false,
 
+   "cli":{
+      "migrationsDir":"./src/database/migrations"
+   },
+
    "models": [
       "src/models/**/*.ts"
    ],
    "migrations": [
-      "src/database/migration/**/*.ts"
+      "./src/database/migration/**/*.ts"
    ],
    "subscribers": [
       "src/subscriber/**/*.ts"
