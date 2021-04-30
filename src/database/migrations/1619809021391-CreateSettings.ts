@@ -14,7 +14,7 @@ export default class CreateSettings1619809021391 implements MigrationInterface {
                     },
                     {
                         name:"username",
-                        type: "varchar"
+                        type: "varchar",
                     },
                     {
                         name: "chat",
