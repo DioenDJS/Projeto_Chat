@@ -1,21 +1,10 @@
-import { Router } from "express";
-import { getCustomRepository } from "typeorm";
-import SettingsRepository from "./repositories/SettingsRepository";
+import { request, Router } from "express";
+import  SettingsController  from "./controllers/SettingsController";
 
 const routes = Router();
 
+const settingsController = new SettingsController();
 
-routes.post("/settings", async (request, response) =>{
-
-    const {chat, username} = request.body;
-    const settingsRepository = getCustomRepository(SettingsRepository) 
-
-    const settings = settingsRepository.create({
-        chat,
-        username
-    })
-
-    await settingsRepository.save(settings);
-})
+routes.post("/settings", settingsController.create);
 
 export { routes };
