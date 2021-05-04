@@ -1,15 +1,23 @@
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, Repository } from "typeorm";
+import { User } from "../models/User";
 import UsersRepository from "../repositories/UsersRepository";
 
 interface IUsers{
     email: string;
 }
+
+
 export default class UsersService{
+    private usersRepository: Repository<User>
+
+    constructor(){
+        this.usersRepository = getCustomRepository(UsersRepository);
+    }
+    
     async create({email}: IUsers){
-        const usersRepository = getCustomRepository(UsersRepository);
 
         //Verificar se usuario existe
-        const userExists = await usersRepository.findOne(email)
+        const userExists = await this.usersRepository.findOne(email)
 
         // Se existir, retornar user
         if(userExists){
@@ -17,9 +25,9 @@ export default class UsersService{
         }
         
         // Se não existir, salvar no DB
-        const user = usersRepository.create({email});
+        const user = this.usersRepository.create({email});
 
-        await usersRepository.save(user);
+        await this.usersRepository.save(user);
 
         return user
     
