@@ -21,5 +21,16 @@ export default class MessagesService {
          await messagesRepository.save(message);
 
          return message;
+     }// fim do metodo create
+
+     async listByUser(user_id: string){
+        const messagesRepository = getCustomRepository(MessagesRepository);
+        
+        const list = await messagesRepository.find({
+            where: {user_id},
+            relations:["user"]
+        });
+
+        return list;
      }
 }
