@@ -1,15 +1,5 @@
-import "reflect-metadata";
-import "./database";
-import { createServer } from "http";
-import { Server, Socket} from "socket.io";
-import app from './app';
-
-const http = createServer(app);// Criando protocolo http
-const io = new Server(http);//Criando protocolo WS
-
-io.on("connection", (Socket: Socket) =>{
-    console.log("Se conectou", Socket.id);
-});
+import {http} from "./app";
+import "./websocket/client";
 
 http.listen(3333, () =>{
     
