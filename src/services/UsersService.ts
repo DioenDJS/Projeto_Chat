@@ -31,5 +31,12 @@ export default class UsersService{
 
         return user
     
+    }//end method create
+
+    async findByEmail({email}: IUsers){
+        const userExistsEmail = await this.usersRepository.findOne({email})
+
+            return userExistsEmail;
     }
+
 }
